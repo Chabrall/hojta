@@ -131,44 +131,126 @@ a:hover { color: var(--orange-deep); }
 .lcd .meta { font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lcd-text); opacity: 0.8; }
 @media (max-width: 480px) { .lcd h1 { font-size: 36px; } }
 
-/* Standalone display cards (outside the help/privacy panel grid): the hero
-   masthead and the secondary app demo both round and shadow on their own. */
-.masthead,
-.demo {
-  border-radius: 14px;
-  box-shadow: 0 1px 0 oklch(97% 0.004 80), 0 10px 24px oklch(0% 0 0 / 12%);
-}
-.masthead { width: min(560px, 100%); margin: 0 auto; }
+/* Standalone display card (outside the help/privacy panel grid): the
+   secondary app demo rounds on its own — the bento cell around it shadows. */
+.demo { border-radius: 14px; }
 
-/* The hero illustration — wider than the text column, like a photograph, not a tile */
-.hero-image {
+/* ---- Hero: huge statement, a small hardware chip, the real app in hand ---- */
+.hero {
+  width: min(640px, 100%);
+  margin: 8px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.hero-headline {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4.25rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--lcd);
+  color: var(--lcd-text);
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-phone { position: relative; margin-top: 36px; display: flex; justify-content: center; }
+.hero-phone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 65%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, oklch(67% 0.22 38 / 60%), transparent 70%);
+  filter: blur(56px);
+}
+.hero-phone img {
+  position: relative;
+  z-index: 1;
   display: block;
-  width: min(880px, 94vw);
-  height: auto;
-  margin: 28px auto 0;
-  border-radius: 14px;
-  box-shadow: 0 1px 0 oklch(97% 0.004 80), 0 14px 32px oklch(0% 0 0 / 14%);
+  height: clamp(380px, 56vw, 560px);
+  width: auto;
+  border-radius: clamp(24px, 4vw, 36px);
+  box-shadow: 0 1px 0 oklch(97% 0.004 80), 0 24px 48px oklch(0% 0 0 / 22%);
 }
 
-/* The open, spacious body — no more seams. Panel styling survives only as
-   accents: the masthead and demo displays, the CTA pill, the FAQ marker. */
+.hero .cta-block { margin-top: 36px; }
+
+/* ---- The open, spacious body below the hero — no more seams. Panel styling
+   survives only as accents: the demo display, the CTA pill, the FAQ marker. ---- */
 .flow {
   width: min(560px, 100%);
-  margin: 44px auto 0;
+  margin: 56px auto 0;
   display: flex;
   flex-direction: column;
 }
 .flow > * + * { margin-top: 48px; }
 
-.promises { list-style: none; margin: 0; padding: 0; }
-.promises li { padding: 20px 0; border-top: 1px solid var(--seam); }
-.promises li:first-child { padding-top: 0; border-top: none; }
-.promises h2 { margin: 0 0 4px; font-size: 19px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--ink); }
-.promises p { margin: 0; font-size: 15px; color: var(--ink-muted); }
+/* ---- Bento grid: mixed cell sizes, color-blocked in the brand's own
+   restrained palette (cream / orange / LCD black) — bold through contrast
+   and scale, not through new hues. ---- */
+.bento {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.bento-cell {
+  grid-column: span 2;
+  border-radius: 24px;
+  padding: 28px 30px;
+  box-shadow: 0 1px 0 oklch(97% 0.004 80 / 60%), 0 14px 28px oklch(0% 0 0 / 10%);
+}
+.bento-cell h2 { margin: 0 0 6px; font-size: 21px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+.bento-cell p { margin: 0; font-size: 15px; }
+@media (min-width: 640px) {
+  .bento-cream:not(.bento-pricing), .bento-orange { grid-column: span 1; }
+}
 
-.pricing .trust-list { margin-top: 16px; }
+.bento-illustration { grid-column: span 2; padding: 0; overflow: hidden; background: var(--tile); }
+.bento-illustration img { display: block; width: 100%; height: auto; }
+.bento-illustration figcaption { padding: 26px 30px 30px; }
+.bento-illustration h2 { color: var(--ink); }
+.bento-illustration p { color: var(--ink-muted); }
 
-.app-demo .demo { margin-top: 16px; }
+.bento-cream { background: var(--tile); }
+.bento-cream h2 { color: var(--ink); }
+.bento-cream p { color: var(--ink-muted); }
+
+.bento-orange { background: linear-gradient(160deg, var(--orange), var(--orange-deep)); }
+.bento-orange h2, .bento-orange p { color: oklch(99% 0.005 80); }
+
+.bento-demo-cell { background: var(--tile); }
+.bento-demo-cell .label { margin-bottom: 12px; }
+
+.bento-pricing .trust-list { margin-top: 18px; }
+
+.bento-cta-banner {
+  background: linear-gradient(160deg, var(--orange), var(--orange-deep));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 34px 30px;
+}
+.bento-cta-banner .label { color: oklch(99% 0.005 80 / 80%); }
 
 .links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
 .links a { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; font-size: 14px; }
@@ -324,6 +406,14 @@ a.key:focus-visible { outline-offset: 4px; border-radius: 50%; }
 }
 .cta:hover, .cta:active { color: oklch(99% 0.005 80); transform: translateY(2px); box-shadow: 0 1px 0 oklch(48% 0.2 38), 0 3px 6px oklch(0% 0 0 / 20%); }
 .cta-block .label { margin: 0; }
+
+/* Inverted CTA for use on the orange banner — light pill instead of orange */
+.cta-invert {
+  background: oklch(99% 0.005 80);
+  color: var(--orange-deep);
+  box-shadow: 0 3px 0 oklch(85% 0.02 80), 0 6px 12px oklch(0% 0 0 / 18%);
+}
+.cta-invert:hover, .cta-invert:active { color: var(--orange-deep); box-shadow: 0 1px 0 oklch(85% 0.02 80), 0 3px 6px oklch(0% 0 0 / 18%); }
 
 /* FAQ — native <details>, no script needed */
 details { border-top: 1px solid var(--seam); padding: 12px 0; }
