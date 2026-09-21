@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hojta — Support</title>
-<meta name="description" content="Support for Hojta, the iPhone intercom for Sonos speakers. Hold a key, say it, and it plays in the room you picked.">
+<title>Hojta — Hold to talk, anywhere in the house</title>
+<meta name="description" content="Hojta is an iPhone intercom for Sonos speakers. Hold a key, say it, and it plays in the room you picked — on the speakers you already own. No account, no cloud.">
 <meta name="theme-color" content="#e2e0dc">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -15,45 +15,116 @@
   <span class="status">Linked <span class="led" aria-hidden="true"></span></span>
 </header>
 
-<main class="panel">
-  <section class="lcd" aria-label="Display">
-    <div class="row"><span>Support</span><span>V 1.0 · Local</span></div>
-    <h1>Hold to talk</h1>
-    <div class="meta">To any room · Sonos · Wi-Fi</div>
-  </section>
+<section class="hero">
+  <h1 class="hero-headline">Stop shouting<br>up the stairs.</h1>
+  <p class="hero-chip"><span class="demo-led" aria-hidden="true"></span>To any room · Sonos · Wi-Fi</p>
 
-  <section class="tile">
-    <p class="lead">Hold a key, say it, and it plays in the room you picked — on the Sonos speakers you already own.</p>
-    <p>No account, no cloud. Hojta talks to the speakers directly over your home Wi-Fi and nothing leaves your home.</p>
-  </section>
+  <div class="hero-phone">
+    <img
+      src="images/hero-phone.webp"
+      width="1015" height="2000"
+      alt="The Hojta app: a grid of Room keys with one selected in orange, a display showing the chosen room, and a record key below — styled like a piece of audio hardware.">
+  </div>
 
-  <section class="tile">
-    <h2>Something not working?</h2>
-    <p>Email <a href="mailto:SUPPORT_EMAIL_TBD">SUPPORT_EMAIL_TBD</a> and include your iPhone model, iOS version and which Sonos speakers you have. You will hear back from the person who built the app.</p>
-  </section>
+  <div class="cta-block">
+    <a class="cta" href="#" aria-label="Join the Hojta TestFlight beta">Join the TestFlight beta</a>
+    <p class="label">Free · One room included</p>
+  </div>
+</section>
 
-  <section class="tile half">
-    <h2>Display says Not Found</h2>
-    <p>The phone must be on the same Wi-Fi as the speakers, not a guest network. Then press Rescan on the Rooms screen.</p>
-  </section>
+<div class="bento">
+  <figure class="bento-cell bento-illustration">
+    <img
+      src="images/hero-house.webp"
+      width="1536" height="1024"
+      alt="A cutaway of a house: someone speaks into their phone in the bedroom upstairs, and a line traces the message down to a speaker in the living room below, where it plays out loud — never leaving the house.">
+    <figcaption>
+      <h2>Nothing leaves your home</h2>
+      <p>No cloud, no login. Hojta talks to your speakers directly over your own Wi-Fi.</p>
+    </figcaption>
+  </figure>
 
-  <section class="tile half">
-    <h2>Max message length</h2>
-    <p class="big">0:30</p>
-    <p>Recording stops at thirty seconds and sends what it has.</p>
-  </section>
-
-  <div class="keyrow">
-    <div class="well">
-      <a class="key" href="privacy.html" aria-label="Privacy policy">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l7 2.8v5.2c0 4.3-3 7.6-7 9-4-1.4-7-4.7-7-9V6.3l7-2.8z"/></svg>
-      </a>
+  <div class="bento-stack">
+    <div class="bento-cell bento-cream">
+      <h2>Hold to talk to any room</h2>
+      <p>No accounts, no setup beyond being on the home Wi-Fi.</p>
     </div>
-    <div class="side">
-      <span class="name"><a href="privacy.html">Privacy policy</a></span>
-      <span class="label">Collects nothing</span>
+
+    <div class="bento-cell bento-orange">
+      <h2>The music comes back</h2>
+      <p>Whatever was playing resumes at the same volume once your message finishes.</p>
     </div>
   </div>
+
+  <div class="bento-cell bento-cream bento-pricing">
+    <p class="label">Pricing</p>
+    <p class="price-statement"><span class="accent">Free</span> for one room, forever.</p>
+    <p class="lead">Unlock Whole House once — shared with your family.</p>
+    <ul class="trust-list">
+      <li>No account</li>
+      <li>No cloud</li>
+      <li>No tracking</li>
+      <li>No ads</li>
+    </ul>
+  </div>
+
+  <section class="bento-cell demo-cell lcd" aria-label="The app itself">
+    <p class="label">The app itself</p>
+    <div class="row">
+      <span>Demo</span>
+      <span class="demo-tx"><span class="demo-led"></span>TX</span>
+    </div>
+    <div class="demo-stage" aria-hidden="true">
+      <span class="demo-idle">Hold to talk</span>
+      <div class="demo-meter">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="demo-meta" aria-hidden="true">
+      <span class="demo-meta-idle">To any room · Sonos · Wi-Fi</span>
+      <span class="demo-meta-active">Recording · Kitchen</span>
+      <span class="demo-meta-sent">Sent · Kitchen</span>
+    </div>
+  </section>
+
+  <div class="bento-cell bento-cta-banner">
+    <a class="cta cta-invert" href="#" aria-label="Join the Hojta TestFlight beta">Join the TestFlight beta</a>
+    <p class="label">Free · One room included</p>
+  </div>
+</div>
+
+<main class="flow">
+  <div class="faq">
+    <p class="label">Questions</p>
+    <details>
+      <summary>Do I need a Sonos account?</summary>
+      <p>No. Hojta finds the speakers on your Wi-Fi directly — there is nothing to sign in to.</p>
+    </details>
+    <details>
+      <summary>Does it work without internet?</summary>
+      <p>Yes. Everything happens on your local network, even if the internet is down.</p>
+    </details>
+    <details>
+      <summary>What happens to the music that was playing?</summary>
+      <p>It pauses, your message plays once, and it resumes right where it left off.</p>
+    </details>
+    <details>
+      <summary>How many rooms are free?</summary>
+      <p>One, forever. The first room you send to becomes your free room. Whole House unlocks every room, once, shared with your family.</p>
+    </details>
+  </div>
+
+  <nav class="links" aria-label="More">
+    <a href="help.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9a3 3 0 1 1 4.5 2.6c-.9.5-1.5 1-1.5 2.4M12 18h.01"/></svg>
+      Help
+    </a>
+    <a href="privacy.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l7 2.8v5.2c0 4.3-3 7.6-7 9-4-1.4-7-4.7-7-9V6.3l7-2.8z"/></svg>
+      Privacy policy
+    </a>
+  </nav>
 </main>
 
 <footer class="foot">
