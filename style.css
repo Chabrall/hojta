@@ -237,7 +237,17 @@ a:hover { color: var(--orange-deep); }
 .bento-demo-cell { background: var(--tile); }
 .bento-demo-cell .label { margin-bottom: 12px; }
 
-.bento-pricing .trust-list { margin-top: 18px; }
+.bento-pricing .price-statement {
+  margin: 4px 0 0;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.bento-pricing .price-statement .accent { color: var(--orange); }
+.bento-pricing .lead { margin-top: 10px; }
+.bento-pricing .trust-list { margin-top: 20px; }
 
 .bento-cta-banner {
   background: linear-gradient(160deg, var(--orange), var(--orange-deep));
