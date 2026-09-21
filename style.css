@@ -152,31 +152,123 @@ a:hover { color: var(--orange-deep); }
 a.key:hover, a.key:active { color: var(--ink); transform: translateY(1px); box-shadow: 0 1px 0 var(--key-edge), 0 2px 4px oklch(0% 0 0 / 18%), inset 0 1px 0 oklch(100% 0 0); }
 a.key:focus-visible { outline-offset: 4px; border-radius: 50%; }
 
-/* Video slot — dark tile, poster only until a real clip exists */
-.poster {
-  grid-column: span 4;
-  background: var(--lcd);
-  min-height: 160px;
+/* Live demo — a second display, showing the send interaction instead of a video.
+   Default state (no animation) is the "recording" frame, so reduced-motion and
+   slow-loading visitors still see something informative rather than a blank idle tile. */
+.demo-tx { display: inline-flex; align-items: center; gap: 6px; }
+.demo-led {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 8px 2px oklch(67% 0.22 38 / 55%);
+}
+
+.demo-stage { position: relative; height: 52px; }
+.demo-idle,
+.demo-meter {
+  position: absolute;
+  inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  box-shadow: inset 0 2px 6px oklch(0% 0 0 / 60%);
 }
-.poster-play {
-  width: 56px; height: 56px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  background: oklch(28% 0.01 260);
-  box-shadow: inset 0 0 0 1px oklch(45% 0.01 260);
+.demo-idle {
+  opacity: 0;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
-.poster-play svg { width: 22px; height: 22px; fill: var(--lcd-text); }
-.poster p { margin: 0; font-family: var(--mono); font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lcd-dim); }
+.demo-meter { align-items: flex-end; gap: 3px; padding-bottom: 4px; opacity: 1; }
+.demo-meter span { flex: 1; min-width: 0; background: var(--lcd-text); border-radius: 1px; height: 55%; }
+.demo-meter span:nth-child(3n+1) { height: 40%; }
+.demo-meter span:nth-child(3n+2) { height: 80%; }
+@media (max-width: 480px) { .demo-idle { font-size: 30px; } }
+
+.demo-meta { position: relative; height: 20px; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; }
+.demo-meta span { position: absolute; inset: 0; opacity: 0; }
+.demo-meta-active { opacity: 0.8; color: var(--orange); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .demo-led { animation: demoTx 7s ease-in-out infinite; }
+  .demo-idle { animation: demoIdle 7s ease-in-out infinite; }
+  .demo-meter { animation: demoMeterGate 7s ease-in-out infinite; }
+  .demo-meter span { animation: demoLevel 1.1s ease-in-out infinite; }
+  .demo-meter span:nth-child(1) { animation-delay: -0.00s; }
+  .demo-meter span:nth-child(2) { animation-delay: -0.13s; }
+  .demo-meter span:nth-child(3) { animation-delay: -0.26s; }
+  .demo-meter span:nth-child(4) { animation-delay: -0.39s; }
+  .demo-meter span:nth-child(5) { animation-delay: -0.52s; }
+  .demo-meter span:nth-child(6) { animation-delay: -0.65s; }
+  .demo-meter span:nth-child(7) { animation-delay: -0.78s; }
+  .demo-meter span:nth-child(8) { animation-delay: -0.91s; }
+  .demo-meta-idle { animation: demoMetaIdle 7s ease-in-out infinite; }
+  .demo-meta-active { animation: demoMetaActive 7s ease-in-out infinite; }
+  .demo-meta-sent { animation: demoMetaSent 7s ease-in-out infinite; }
+}
+
+@keyframes demoTx {
+  0%, 20% { background: oklch(38% 0.09 38); box-shadow: none; }
+  25%, 88% { background: var(--orange); box-shadow: 0 0 8px 2px oklch(67% 0.22 38 / 55%); }
+  92%, 100% { background: oklch(38% 0.09 38); box-shadow: none; }
+}
+@keyframes demoIdle {
+  0%, 16% { opacity: 1; }
+  22%, 90% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes demoMeterGate {
+  0%, 20% { opacity: 0; }
+  26%, 70% { opacity: 1; }
+  76%, 100% { opacity: 0; }
+}
+@keyframes demoLevel {
+  0%, 100% { height: 18%; }
+  50% { height: 85%; }
+}
+@keyframes demoMetaIdle {
+  0%, 16% { opacity: 0.8; }
+  22%, 90% { opacity: 0; }
+  100% { opacity: 0.8; }
+}
+@keyframes demoMetaActive {
+  0%, 20% { opacity: 0; }
+  26%, 70% { opacity: 0.8; }
+  76%, 100% { opacity: 0; }
+}
+@keyframes demoMetaSent {
+  0%, 73% { opacity: 0; }
+  78%, 88% { opacity: 0.8; }
+  93%, 100% { opacity: 0; }
+}
 
 /* Three promise tiles, side by side on wide panels */
 .third { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .third h2 { margin-bottom: 6px; }
 @media (max-width: 480px) { .third { grid-template-columns: 1fr; gap: 16px; } }
+
+/* Trust list — a terse "we promise" row instead of a paragraph */
+.trust-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trust-list li {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.trust-list li::before {
+  content: "–";
+  display: inline-block;
+  width: 1.1em;
+  color: var(--orange);
+  font-weight: 500;
+}
 
 /* Download call to action */
 .cta-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
