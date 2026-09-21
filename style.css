@@ -107,7 +107,7 @@ a:hover { color: var(--orange-deep); }
   color: var(--ink-soft);
 }
 .big { font-size: 24px; font-weight: 300; line-height: 1.1; color: var(--ink); margin: 0 0 6px; }
-.lead { font-size: 16px; color: var(--ink); }
+.lead { font-size: 18px; line-height: 1.5; color: var(--ink); margin: 0; }
 
 .half { grid-column: span 2; }
 @media (max-width: 480px) { .half { grid-column: span 4; } }
@@ -130,6 +130,51 @@ a:hover { color: var(--orange-deep); }
 .lcd h1 { margin: 0; font-size: 44px; font-weight: 400; line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase; text-wrap: balance; }
 .lcd .meta { font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lcd-text); opacity: 0.8; }
 @media (max-width: 480px) { .lcd h1 { font-size: 36px; } }
+
+/* Standalone display cards (outside the help/privacy panel grid): the hero
+   masthead and the secondary app demo both round and shadow on their own. */
+.masthead,
+.demo {
+  border-radius: 14px;
+  box-shadow: 0 1px 0 oklch(97% 0.004 80), 0 10px 24px oklch(0% 0 0 / 12%);
+}
+.masthead { width: min(560px, 100%); margin: 0 auto; }
+
+/* The hero illustration — wider than the text column, like a photograph, not a tile */
+.hero-image {
+  display: block;
+  width: min(880px, 94vw);
+  height: auto;
+  margin: 28px auto 0;
+  border-radius: 14px;
+  box-shadow: 0 1px 0 oklch(97% 0.004 80), 0 14px 32px oklch(0% 0 0 / 14%);
+}
+
+/* The open, spacious body — no more seams. Panel styling survives only as
+   accents: the masthead and demo displays, the CTA pill, the FAQ marker. */
+.flow {
+  width: min(560px, 100%);
+  margin: 44px auto 0;
+  display: flex;
+  flex-direction: column;
+}
+.flow > * + * { margin-top: 48px; }
+
+.promises { list-style: none; margin: 0; padding: 0; }
+.promises li { padding: 20px 0; border-top: 1px solid var(--seam); }
+.promises li:first-child { padding-top: 0; border-top: none; }
+.promises h2 { margin: 0 0 4px; font-size: 19px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--ink); }
+.promises p { margin: 0; font-size: 15px; color: var(--ink-muted); }
+
+.pricing .trust-list { margin-top: 16px; }
+
+.app-demo .demo { margin-top: 16px; }
+
+.links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+.links a { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; font-size: 14px; }
+.links a:hover { color: var(--orange); }
+.links svg { width: 18px; height: 18px; fill: none; stroke: var(--ink-soft); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.links a:hover svg { stroke: var(--orange); }
 
 /* Key row: a round key on the left, a label tile filling the rest */
 .keyrow { display: grid; grid-template-columns: 96px 1fr; gap: 2px; background: transparent; padding: 0; }
@@ -242,11 +287,6 @@ a.key:focus-visible { outline-offset: 4px; border-radius: 50%; }
   93%, 100% { opacity: 0; }
 }
 
-/* Three promise tiles, side by side on wide panels */
-.third { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.third h2 { margin-bottom: 6px; }
-@media (max-width: 480px) { .third { grid-template-columns: 1fr; gap: 16px; } }
-
 /* Trust list — a terse "we promise" row instead of a paragraph */
 .trust-list {
   display: flex;
@@ -271,7 +311,7 @@ a.key:focus-visible { outline-offset: 4px; border-radius: 50%; }
 }
 
 /* Download call to action */
-.cta-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.cta-block { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
 .cta {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 220px; padding: 14px 28px; border-radius: 999px;
@@ -283,16 +323,16 @@ a.key:focus-visible { outline-offset: 4px; border-radius: 50%; }
   transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 120ms cubic-bezier(0.2, 0, 0, 1);
 }
 .cta:hover, .cta:active { color: oklch(99% 0.005 80); transform: translateY(2px); box-shadow: 0 1px 0 oklch(48% 0.2 38), 0 3px 6px oklch(0% 0 0 / 20%); }
-.cta-tile .label { margin: 0; }
+.cta-block .label { margin: 0; }
 
 /* FAQ — native <details>, no script needed */
-.tile details { border-top: 1px solid var(--seam); padding: 12px 0; }
-.tile details:first-of-type { border-top: none; padding-top: 0; }
-.tile summary { cursor: pointer; font-size: 14px; color: var(--ink); list-style: none; }
-.tile summary::-webkit-details-marker { display: none; }
-.tile summary::before { content: "+"; display: inline-block; width: 1em; color: var(--orange); font-weight: 500; }
-.tile details[open] summary::before { content: "−"; }
-.tile details p { margin-top: 8px; }
+details { border-top: 1px solid var(--seam); padding: 12px 0; }
+details:first-of-type { border-top: none; padding-top: 0; }
+summary { cursor: pointer; font-size: 14px; color: var(--ink); list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; display: inline-block; width: 1em; color: var(--orange); font-weight: 500; }
+details[open] summary::before { content: "−"; }
+details p { margin-top: 8px; }
 
 .foot {
   width: min(560px, 100%);
